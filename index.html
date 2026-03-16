@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Navvinram — Senior Production Support Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --deep: #112240;
+    --accent: #1e88e5;
+    --gold: #f0a500;
+    --light: #e8edf3;
+    --muted: #8892a4;
+    --white: #ffffff;
+    --card: #162032;
+    --border: #1e3a5f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--light);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 18px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(30,88,159,0.3);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(30,136,229,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(240,165,0,0.06) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(var(--accent) 1px, transparent 1px),
+      linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 700px; }
+  .hero-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 500;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-subtitle {
+    font-size: 1.15rem; color: var(--muted);
+    line-height: 1.7; max-width: 560px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.3s ease both;
+    font-weight: 400;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #fff; border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #1565c0; transform: translateY(-2px); }
+  .btn-outline {
+    padding: 13px 32px;
+    background: transparent;
+    color: var(--light);
+    border: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 32px;
+    animation: fadeLeft 1s 0.5s ease both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: var(--white); line-height: 1;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px; font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; color: var(--white);
+    margin-bottom: 60px; line-height: 1.2;
+  }
+  .section-title em { color: var(--accent); font-style: normal; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--deep); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-icon { font-size: 2rem; margin-bottom: 16px; }
+  .skill-title { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 12px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 4px 10px;
+    background: rgba(30,136,229,0.12);
+    border: 1px solid rgba(30,136,229,0.3);
+    color: var(--accent);
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--navy); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item {
+    padding-left: 48px; margin-bottom: 60px;
+    position: relative;
+    opacity: 0; transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute; left: -7px; top: 6px;
+    width: 16px; height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 3px solid var(--navy);
+  }
+  .timeline-period {
+    font-size: 0.75rem; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 8px; font-weight: 600;
+  }
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .timeline-company { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; font-weight: 400; }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    color: var(--muted);
+    font-size: 0.9rem; line-height: 1.6;
+    border-bottom: 1px solid rgba(30,88,159,0.2);
+  }
+  .timeline-bullets li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); font-weight: 600;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certs { background: var(--deep); }
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 32px;
+    display: flex; align-items: flex-start; gap: 20px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .cert-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .cert-badge {
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: rgba(240,165,0,0.12);
+    border: 1px solid rgba(240,165,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .cert-name { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .cert-org { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── AWARDS ── */
+  #awards { background: var(--navy); }
+  .awards-row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .award-card {
+    flex: 1 1 220px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 32px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .award-card:hover { transform: translateY(-4px); }
+  .award-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+  }
+  .award-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: var(--gold); line-height: 1;
+  }
+  .award-title { font-size: 0.95rem; font-weight: 600; color: var(--white); margin: 12px 0 8px; }
+  .award-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--deep);
+    text-align: center;
+  }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-email {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--white);
+    margin: 30px 0;
+  }
+  .contact-detail { color: var(--muted); font-size: 0.95rem; margin: 8px 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: var(--muted);
+    background: var(--navy);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translate(30px, -50%); }
+    to   { opacity: 1; transform: translate(0, -50%); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-stats { display: none; }
+    section { padding: 70px 24px; }
+    footer { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">N<span>.</span>Ram</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to Opportunities</div>
+    <h1 class="hero-name">Navvin<span>ram</span></h1>
+    <p class="hero-subtitle">
+      Senior L2 Production Support Engineer with 8+ years driving stability in large-scale financial applications. Specialist in Oracle SQL, AppDynamics, Splunk, ETL pipelines, and distributed system incident management.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">30<span>+</span></div>
+      <div class="stat-label">Awards Won</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Companies</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Technical <em>Skills</em></h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-title">Databases & SQL</div>
+      <div class="skill-tags">
+        <span class="tag">Oracle</span>
+        <span class="tag">PL/SQL</span>
+        <span class="tag">SQL Developer</span>
+        <span class="tag">Teradata</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-title">Monitoring & APM</div>
+      <div class="skill-tags">
+        <span class="tag">AppDynamics</span>
+        <span class="tag">Splunk</span>
+        <span class="tag">ITRS Geneos</span>
+        <span class="tag">Bob Monitor</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🔄</div>
+      <div class="skill-title">ETL & Data Warehousing</div>
+      <div class="skill-tags">
+        <span class="tag">Ab Initio</span>
+        <span class="tag">DataStage</span>
+        <span class="tag">Data Validation</span>
+        <span class="tag">Reference Data</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-title">DevOps & Scheduling</div>
+      <div class="skill-tags">
+        <span class="tag">Autosys</span>
+        <span class="tag">JIRA</span>
+        <span class="tag">ServiceNow</span>
+        <span class="tag">BMC Remedy</span>
+        <span class="tag">Blade Logic</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <div class="skill-title">Scripting & Development</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">UNIX/Linux</span>
+        <span class="tag">Shell Scripting</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-title">Cloud & Platforms</div>
+      <div class="skill-tags">
+        <span class="tag">Azure Fundamentals</span>
+        <span class="tag">Azure Virtual Desktop</span>
+        <span class="tag">BusinessObjects</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Work <em>Experience</em></h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">July 2022 – Present</div>
+      <div class="timeline-role">Senior Software Engineer</div>
+      <div class="timeline-company">BA Continuum India Pvt. Ltd. · Chennai, India</div>
+      <ul class="timeline-bullets">
+        <li>Delivered L2 production support for large-scale financial applications, maintaining SLA compliance and minimal operational disruption.</li>
+        <li>Used Oracle SQL and SQL Developer for rapid data research, batch anomaly investigation, and root cause analysis.</li>
+        <li>Leveraged AppDynamics, Splunk, Geneos, and ITRS for proactive monitoring and performance diagnostics across distributed systems.</li>
+        <li>Coordinated incident triage, authored RCA reports, and escalated critical issues to L3 teams with full context.</li>
+        <li>Automated monitoring and diagnostic workflows using UNIX/Shell Scripting, Autosys, BMC Remedy, and Blade Logic.</li>
+        <li>Managed documentation and incident tracking through JIRA, ServiceNow, and Confluence.</li>
+        <li>Received 20+ E-card Awards and four SPOT Awards for excellence during critical production incidents.</li>
+        <li>Recognized with Best Team Award for outstanding quarterly performance.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">February 2017 – July 2022</div>
+      <div class="timeline-role">L2 Production Support Engineer</div>
+      <div class="timeline-company">Tata Consultancy Services · India</div>
+      <ul class="timeline-bullets">
+        <li>Conducted Level 2 incident analysis for large financial application portfolios, resolving issues within SLA windows.</li>
+        <li>Performed deep-dive SQL queries in Teradata and Oracle for data investigation and anomaly resolution.</li>
+        <li>Used AppDynamics and Splunk for log analysis and anomaly detection across distributed application stacks.</li>
+        <li>Supported major data feed releases and batch recovery processes with full data validation post-completion.</li>
+        <li>Delivered RCA findings to L3 teams and communicated clearly with stakeholders and business users.</li>
+        <li>Received 10+ SPOT Awards for commitment to service excellence during critical production events.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications &amp; <em>Education</em></h2>
+  <div class="certs-grid">
+
+    <div class="cert-card">
+      <div class="cert-badge">☁️</div>
+      <div>
+        <div class="cert-name">Azure Fundamentals</div>
+        <div class="cert-org">Microsoft · AZ-900</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">🖥️</div>
+      <div>
+        <div class="cert-name">Azure Virtual Desktop</div>
+        <div class="cert-org">Microsoft Certification</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">🔧</div>
+      <div>
+        <div class="cert-name">SRE Foundation</div>
+        <div class="cert-org">Site Reliability Engineering</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">🎓</div>
+      <div>
+        <div class="cert-name">B.E. Mechanical Engineering</div>
+        <div class="cert-org">Sri Sai Ram Institute of Technology, Anna University · 2016 · CGPA 80%</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title">Awards &amp; <em>Achievements</em></h2>
+  <div class="awards-row">
+
+    <div class="award-card">
+      <div class="award-num">20+</div>
+      <div class="award-title">E-card Awards</div>
+      <div class="award-desc">Received at BA Continuum for consistent contribution to production stability and team support.</div>
+    </div>
+
+    <div class="award-card">
+      <div class="award-num">4</div>
+      <div class="award-title">SPOT Awards — BACIL</div>
+      <div class="award-desc">Awarded for exceptional performance during critical production incidents and outstanding commitment.</div>
+    </div>
+
+    <div class="award-card">
+      <div class="award-num">10+</div>
+      <div class="award-title">SPOT Awards — TCS</div>
+      <div class="award-desc">Recognized for exemplary support during high-priority incidents at Tata Consultancy Services.</div>
+    </div>
+
+    <div class="award-card">
+      <div class="award-num">🏆</div>
+      <div class="award-title">Best Team Award</div>
+      <div class="award-desc">Part of the best performing team recognized for delivering exceptional quarterly results at BA Continuum.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title" style="margin-bottom:20px;">Get In <em>Touch</em></h2>
+    <p style="color:var(--muted); max-width:480px; margin:0 auto 32px; font-size:0.95rem; line-height:1.7;">
+      Open to Senior L2 Production Support roles in the financial services industry. Available for discussions on exciting opportunities.
+    </p>
+    <div class="contact-email">navvinram@gmail.com</div>
+    <div class="contact-detail">📞 +91-9514642077</div>
+    <div class="contact-detail">📍 Chennai, Tamil Nadu, India</div>
+    <br/>
+    <a href="mailto:navvinram@gmail.com" class="btn-primary" style="margin-top:16px; display:inline-block;">Send a Message</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Navvinram. Senior Production Support Engineer.</span>
+  <span>Chennai · Tamil Nadu · India</span>
+</footer>
+
+<script>
+  // Scroll-triggered timeline animations
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 150);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(el => observer.observe(el));
+
+  // Smooth nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
